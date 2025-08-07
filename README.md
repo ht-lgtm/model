@@ -135,7 +135,7 @@ Results saved to runs/detect/predict
 
 ## 3. 추론 및 결과 확인 (my_model.py)
 목표: 학습된 커스텀 모델을 실제 영상에 적용하여 성능을 검증합니다.
-내용:
+내용:https://docs.ultralytics.com/ko/modes/track/
 
 my_model.py 스크립트는 학습 완료된 가중치 파일(best.pt)을 불러옵니다.
 
