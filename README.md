@@ -1,13 +1,15 @@
 # YOLOv11n 기반 불법 주정차 탐지 시스템
-🚗 프로젝트 개요
+## 🚗 프로젝트 개요
 본 프로젝트는 YOLOv11n (You Only Look Once version 11 nano) 모델을 활용하여 CCTV 영상에서 불법 주정차 차량을 실시간으로 탐지하는 시스템을 개발하는 것을 목표로 합니다. AI-Hub의 '종합민원 이미지' 데이터셋과 ITS 국가교통정보센터에서 제공하는 실제 교통 영상 데이터를 사용하여 모델을 학습하고 성능을 검증했습니다.
 
-⚙️ 개발 과정
+## ⚙️ 개발 과정
 프로젝트는 크게 데이터 전처리, 모델 학습, 추론 및 검증의 세 단계로 진행되었습니다.
 
-1. 데이터 전처리 (app.py)
+## 1. 데이터 전처리 (app.py)
 목표: YOLO 모델 학습에 적합한 형태로 원시 데이터를 가공합니다.
 데이터 출처: AI-Hub 종합민원 이미지 데이터
+
+https://www.aihub.or.kr/aihubdata/data/list.do?searchKeyword=%EC%A2%85%ED%95%A9%EB%AF%BC%EC%9B%90+%EC%9D%B4%EB%AF%B8%EC%A7%80
 내용:
 
 학습에 사용할 영상 데이터에서 프레임 단위로 이미지를 추출합니다.
@@ -16,7 +18,7 @@
 
 app.py 스크립트를 사용하여 이 과정을 자동화하고, 학습 데이터셋과 검증 데이터셋을 구축합니다.
 
-2. YOLOv11n 모델 학습 (yolo_test.ipynb)
+## 2. YOLOv11n 모델 학습 (yolo_test.ipynb)
 목표: 전처리된 데이터를 사용하여 불법 주정차 차량 탐지 모델을 학습시킵니다.
 내용:
 
@@ -27,45 +29,42 @@ app.py 스크립트를 사용하여 이 과정을 자동화하고, 학습 데이
 전처리된 데이터셋을 이용해 모델을 Fine-tuning(미세 조정)하여, 우리 데이터에 특화된 객체 탐지 모델(best.pt 가중치 파일)을 생성했습니다.
 
 학습 과정 전체 코드 및 결과:
-1단계: 필요 라이브러리 설치
+### 1단계: 필요 라이브러리 설치
 
-# YOLO 모델을 사용하기 위해 필요한 ultralytics 라이브러리를 설치합니다.
+YOLO 모델을 사용하기 위해 필요한 ultralytics 라이브러리를 설치합니다.
 !pip install ultralytics
 
 
-실행 결과:
+### 실행 결과:
 
 Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.pt to 'yolov8n.pt': 100% 6.25M/6.25M [00:00<00:00, 63.7MB/s]
 ...
 Successfully installed ultralytics-8.3.175
 
 
-2단계: Google Drive 연동
+### 2단계: 데이터셋 준비
 
-# 데이터셋이 저장된 Google Drive에 접근하기 위해 드라이브를 마운트합니다.
-from google.colab import drive
-drive.mount('/content/drive')
+데이터셋을 저장할 폴더(datasets)를 만들고, 그 폴더로 작업 위치를 이동
+!mkdir {HOME}/datasets
+%cd {HOME}/datasets
 
-
-실행 결과:
-
-Mounted at /content/drive
+다운로드한 파일의 압축을 해제하여 데이터셋을 사용할 수 있도록 준비합니다.
+!unzip -qq car_Suv.zip
 
 
-3단계: YOLOv11n 모델 로드 및 학습
+### 3단계: YOLOv11n 모델 로드 및 학습
 
 from ultralytics import YOLO
 
-# 사전 학습된 yolov11n 모델을 로드합니다.
+사전 학습된 yolov11n 모델을 로드합니다.
 model = YOLO('yolov11n.pt')
 
-# data.yaml 파일에 정의된 경로의 데이터셋으로 모델을 학습시킵니다.
-# epochs: 전체 데이터셋 반복 횟수
-# imgsz: 학습에 사용될 이미지 크기
-results = model.train(data='/content/datasets/data.yaml', epochs=300, imgsz=640)
+data.yaml 파일에 정의된 경로의 데이터셋으로 모델을 학습시킵니다.
+epochs: 전체 데이터셋 반복 횟수
+imgsz: 학습에 사용될 이미지 크기
+!yolo task=detect mode=train model=yolov11n.pt data=/content/datasets/data.yaml epochs=300 imgsz=640
 
-
-실행 결과:
+### 실행 결과:
 
 Downloading https://ultralytics.com/assets/Arial.ttf to '/root/.config/Ultralytics/Arial.ttf': 100% 755k/755k [00:00<00:00, 13.3MB/s]
 ...
@@ -110,18 +109,18 @@ Speed: 0.2ms preprocess, 2.1ms inference, 0.0ms loss, 2.1ms postprocess per imag
 Results saved to runs/detect/train
 
 
-4단계: 학습된 모델로 추론(예측) 수행
+### 4단계: 학습된 모델로 추론(예측) 수행
 
 from ultralytics import YOLO
 
-# 학습으로 생성된 가중치 파일 중 가장 성능이 좋은 best.pt를 로드합니다.
+학습으로 생성된 가중치 파일 중 가장 성능이 좋은 best.pt를 로드합니다.
 model = YOLO('/content/runs/detect/train/weights/best.pt')
 
-# 테스트 비디오 파일을 사용하여 추론을 실행하고, 결과를 저장합니다.
+테스트 비디오 파일을 사용하여 추론을 실행하고, 결과를 저장합니다.
 results = model.predict(source='/content/drive/MyDrive/Colab Notebooks/test_video.mp4', save=True)
 
 
-실행 결과:
+### 실행 결과:
 
 (학습 완료 후 추론을 진행하여 최종 추론 결과를 확인할 수 있습니다.)
 video 1/1 (1/2398) /content/drive/MyDrive/Colab Notebooks/test_video.mp4: 384x640 5 cars, 1 bus, 7.0ms
@@ -130,19 +129,19 @@ Speed: 0.2ms preprocess, 2.1ms inference, 0.0ms loss, 2.1ms postprocess per imag
 Results saved to runs/detect/predict
 
 
-3. 추론 및 결과 확인 (my_model.py)
+## 3. 추론 및 결과 확인 (my_model.py)
 목표: 학습된 커스텀 모델을 실제 영상에 적용하여 성능을 검증합니다.
 내용:
 
 my_model.py 스크립트는 학습 완료된 가중치 파일(best.pt)을 불러옵니다.
 
-ITS 국가교통정보센터에서 수집한 실제 주행 및 주차 환경이 담긴 테스트 영상을 입력합니다.
+ITS 국가교통정보센터에서 수집한 실제 주행 및 주차 환경이 담긴 테스트 영상을 녹화했습니다.
 
 영상의 각 프레임마다 객체 탐지를 수행하여 차량의 위치를 실시간으로 추적합니다.
 
 탐지된 차량이 특정 영역에서 일정 시간 이상 머무를 경우 '불법 주정차'로 판단하고, 해당 차량을 시각적으로 표시(예: Bounding Box 색상 변경)하여 결과를 확인합니다.
 
-🚀 실행 방법
+## 🚀 실행 방법
 저장소 복제
 
 git clone https://github.com/ht-lgtm/model.git
