@@ -110,6 +110,7 @@ Results saved to runs/detect/train
 
 
 ![Image](https://github.com/user-attachments/assets/d652df96-9269-47fc-a093-914d66a99b29)
+<img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/d4302d67-d168-438c-b5e5-f28c961f0250" />
 
 
 ### 4단계: 학습된 모델로 추론(예측) 수행
