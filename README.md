@@ -109,6 +109,9 @@ Speed: 0.2ms preprocess, 2.1ms inference, 0.0ms loss, 2.1ms postprocess per imag
 Results saved to runs/detect/train
 
 
+![Image](https://github.com/user-attachments/assets/d652df96-9269-47fc-a093-914d66a99b29)
+
+
 ### 4단계: 학습된 모델로 추론(예측) 수행
 
 from ultralytics import YOLO
