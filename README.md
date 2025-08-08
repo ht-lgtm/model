@@ -113,9 +113,11 @@ Model summary (fused): 72 layers, 3,006,038 parameters, 0 gradients, 8.1 GFLOPs
 Speed: 0.2ms preprocess, 2.1ms inference, 0.0ms loss, 2.1ms postprocess per image
 Results saved to runs/detect/train
 
-
+### 2400장 결과
 ![Image](https://github.com/user-attachments/assets/d652df96-9269-47fc-a093-914d66a99b29)
 <img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/d4302d67-d168-438c-b5e5-f28c961f0250" />
+
+### 80000장, yolo11s모델 사용 결과
 
 
 ### 4단계: 학습된 모델로 추론(예측) 수행
