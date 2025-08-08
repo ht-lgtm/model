@@ -18,7 +18,8 @@ https://www.aihub.or.kr/aihubdata/data/list.do?searchKeyword=%EC%A2%85%ED%95%A9%
 
 app.py 스크립트를 사용하여 이 과정을 자동화하고, 학습 데이터셋과 검증 데이터셋을 구축합니다.
 
-<img width="1299" height="827" alt="Image" src="https://github.com/user-attachments/assets/7ba19f1f-af99-45d2-b275-a2106d2bdd60" />                    <img width="1077" height="869" alt="Image" src="https://github.com/user-attachments/assets/5563b6d4-4dae-47af-a2f7-d333f2a11810" />
+<img width="1299" height="827" alt="Image" src="https://github.com/user-attachments/assets/7ba19f1f-af99-45d2-b275-a2106d2bdd60" />           
+<img width="1077" height="869" alt="Image" src="https://github.com/user-attachments/assets/5563b6d4-4dae-47af-a2f7-d333f2a11810" />
 
 ## 2. YOLOv11n 모델 학습 (yolo_test.ipynb)
 목표: 전처리된 데이터를 사용하여 불법 주정차 차량 탐지 모델을 학습시킵니다.
