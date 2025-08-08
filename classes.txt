@@ -1,8 +1,2 @@
-bicycle 
-bus
 car
-motorbike 
-person
-traffic_information
-traffic_light
-traffic_sign
+Suv
