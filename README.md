@@ -65,8 +65,11 @@ from ultralytics import YOLO
 model = YOLO('yolov11n.pt')
 
 data.yaml 파일에 정의된 경로의 데이터셋으로 모델을 학습시킵니다.
+
 epochs: 전체 데이터셋 반복 횟수
+
 imgsz: 학습에 사용될 이미지 크기
+
 !yolo task=detect mode=train model=yolov11n.pt data=/content/datasets/data.yaml epochs=300 imgsz=640
 
 <img width="2552" height="1305" alt="Image" src="https://github.com/user-attachments/assets/1474f12c-458d-401f-b452-9b76748880c2" />
