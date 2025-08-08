@@ -120,6 +120,7 @@ Results saved to runs/detect/train
 <img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/d4302d67-d168-438c-b5e5-f28c961f0250" />
 
 ### 80000장, yolo11s모델 사용 결과
+![Image](https://github.com/user-attachments/assets/fd6a9620-be02-4a49-b71c-26bb3ba52328)
 <img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/3dd902d8-cd41-4290-a3a4-09ea22b6be04" />
 
 ### 4단계: 학습된 모델로 추론(예측) 수행
