@@ -57,12 +57,12 @@ Successfully installed ultralytics-8.3.175
 from ultralytics import YOLO
 
 사전 학습된 yolov11n 모델을 로드합니다.
-model = YOLO('yolov11n.pt')
+     model = YOLO('yolov11n.pt')
 
 data.yaml 파일에 정의된 경로의 데이터셋으로 모델을 학습시킵니다.
 epochs: 전체 데이터셋 반복 횟수
 imgsz: 학습에 사용될 이미지 크기
-!yolo task=detect mode=train model=yolov11n.pt data=/content/datasets/data.yaml epochs=300 imgsz=640
+     !yolo task=detect mode=train model=yolov11n.pt data=/content/datasets/data.yaml epochs=300 imgsz=640
 
 ### 실행 결과:
 
