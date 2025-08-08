@@ -47,10 +47,13 @@ Successfully installed ultralytics-8.3.175
 ### 2단계: 데이터셋 준비
 
 데이터셋을 저장할 폴더(datasets)를 만들고, 그 폴더로 작업 위치를 이동
+
 !mkdir {HOME}/datasets
+
 %cd {HOME}/datasets
 
 다운로드한 파일의 압축을 해제하여 데이터셋을 사용할 수 있도록 준비합니다.
+
 !unzip -qq car_Suv.zip
 
 
